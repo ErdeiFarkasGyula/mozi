@@ -155,31 +155,46 @@ let foglalasok = {
         id: 1,
         nev: "Pop Simon",
         vetitesId: 1,
-        hely: { sor: 2, szek: 5 }
+        hely: { sor: 2, szek: 5 },
+        bankkartya: "1234 5678 9012 3456", //Most ne foglalkozzunk a kiberbiztonsági tényezőkkel...
+        ervenyesseg: "12/24",
+        cvv: "123"
     },
     2: {
         id: 2,
         nev: "Tüdő R. Ákos",
         vetitesId: 1,
-        hely: { sor: 3, szek: 10 }
+        hely: { sor: 3, szek: 10 },
+        bankkartya: "9876 5432 1098 7654",
+        ervenyesseg: "11/25",
+        cvv: "456"
     },
     3: {
         id: 3,
         nev: "Agyalá Gyula",
         vetitesId: 3,
-        hely: { sor: 1, szek: 3 }
+        hely: { sor: 1, szek: 3 },
+        bankkartya: "1111 2222 3333 4444",
+        ervenyesseg: "10/23",
+        cvv: "789"
     },
     4: {
         id: 4,
         nev: "Füty Imre",
         vetitesId: 4,
-        hely: { sor: 2, szek: 7 }
+        hely: { sor: 2, szek: 7 },
+        bankkartya: "5555 6666 7777 8888",
+        ervenyesseg: "09/22",
+        cvv: "012"
     },
     5: {
         id: 5,
         nev: "Szék Elek",
         vetitesId: 6,
-        hely: { sor: 1, szek: 1 }
+        hely: { sor: 1, szek: 1 },
+        bankkartya: "9999 0000 1111 2222",
+        ervenyesseg: "08/24",
+        cvv: "345"
     }
 }
 

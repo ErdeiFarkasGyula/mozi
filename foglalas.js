@@ -40,23 +40,30 @@ function szekValasztas(event) {
         const szek = target.dataset.szek;
         alert(`Kiválasztott hely: Sor ${sor}, Szek ${szek}`);
         const nev = prompt("Kérem adja meg a nevét:");
-        if (nev) {
+        const bankkartya = prompt("Kérem adja meg a bankkártya számát:");
+        const ervenyesseg = prompt("Kérem adja meg a bankkártya érvényességét (MM/YY):");
+        const cvv = prompt("Kérem adja meg a bankkártya CVV kódját:");
+
+        if (nev && bankkartya && ervenyesseg && cvv) {
             const urlParams = new URLSearchParams(window.location.search);
             const vetitesId = parseInt(urlParams.get("vetitesId"));
-            foglalasMentese(vetitesId, sor, szek, nev);
+            foglalasMentese(vetitesId, sor, szek, nev, bankkartya, ervenyesseg, cvv);
             target.classList.add("foglalt");
             target.title = nev;
         }
     }
 }
 
-function foglalasMentese(vetitesId, sor, szek, nev) {
+function foglalasMentese(vetitesId, sor, szek, nev, bankkartya, ervenyesseg, cvv) {
     const ujFoglalasId = Object.keys(foglalasok).length + 1;
     foglalasok[ujFoglalasId] = {
         id: ujFoglalasId,
         nev: nev,
         vetitesId: vetitesId,
-        hely: { sor: sor, szek: szek }
+        hely: { sor: sor, szek: szek },
+        bankkartya: bankkartya,
+        ervenyesseg: ervenyesseg,
+        cvv: cvv
     };
     alert("Foglalás sikeres!");
 }
