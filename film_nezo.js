@@ -27,7 +27,8 @@ function filmInfoBetoltese() {
     const urlParams = new URLSearchParams(window.location.search);
     const filmId = parseInt(urlParams.get("id"));
     const film = getFilmById(filmId);
-    if (film) { 
+
+    if (film) {
         filmCimElem.textContent = `${film.cim} (${film.ev})`;
         filmEredetiCimElem.textContent = film.eredetiCim;
         filmLeirasElem.textContent = film.leiras;
@@ -48,19 +49,11 @@ function filmInfoBetoltese() {
 
         const filmVetitesek = Object.values(vetitesek).filter(v => v.filmId === film.id);
         if (filmVetitesek.length > 0) {
-            const ul = document.createElement("ul");
-            filmVetitesek.forEach(vetites => {
-                const li = document.createElement("li");
-                const terem = termek[vetites.teremId] ? termek[vetites.teremId].nev : "Ismeretlen terem";
-                const kezdes = new Date(vetites.kezdes).toLocaleString();
-                li.innerHTML = `${terem} - ${kezdes} - ${vetites.nyelv.toUpperCase()}${vetites.felirat ? ` (Felirat: ${vetites.felirat.toUpperCase()})` : ""} - ${vetites.ar} Ft <button onclick="window.location.href='foglalas.html?vetitesId=${vetites.id}'">Foglalás</button>`;
-                ul.appendChild(li);
-            });
-            vetitesekElem.appendChild(ul);
+            vetitesekElem.appendChild(filmvetitesElem(filmVetitesek));
         } else {
             vetitesekElem.innerHTML = "<p>Nincsenek vetítések ehhez a filmhez.</p>";
         }
-        
+
     } else {
         filmCimElem.textContent = "Film nem található";
         filmEredetiCimElem.textContent = "";
@@ -74,3 +67,15 @@ function filmInfoBetoltese() {
         filmPoszterElem.alt = "";
     }
 }
+
+function filmvetitesElem(filmVetitesek) {
+    const ul = document.createElement("ul");
+    filmVetitesek.forEach(vetites => {
+        const li = document.createElement("li");
+        const terem = termek[vetites.teremId] ? termek[vetites.teremId].nev : "Ismeretlen terem";
+        const kezdes = new Date(vetites.kezdes).toLocaleString();
+        li.innerHTML = `${terem} - ${kezdes} - ${vetites.nyelv.toUpperCase()}${vetites.felirat ? ` (Felirat: ${vetites.felirat.toUpperCase()})` : ""} - ${vetites.ar} Ft <button onclick="window.location.href='foglalas.html?vetitesId=${vetites.id}'">Foglalás</button>`;
+        ul.appendChild(li);
+    })
+    return ul;
+};

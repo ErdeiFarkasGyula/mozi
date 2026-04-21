@@ -103,7 +103,7 @@ let vetitesek = {
     4: {
         id: 4,
         filmId: 3,
-        teremId: 3,
+        teremId: 1,
         kezdes: "2024-06-02T18:00:00",
         ar: 2700,
         nyelv: "en",
@@ -120,8 +120,8 @@ let vetitesek = {
     },
     6: {
         id: 6,
-        filmId: 5,
-        teremId: 3,
+        filmId: 3,
+        teremId: 2,
         kezdes: "2024-06-03T16:00:00",
         ar: 2000,
         nyelv: "hu",

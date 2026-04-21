@@ -22,7 +22,12 @@ function teremVizualizalas(teremId) {
     }
 }
 
-function foglalasVizualizalas(vetitesId) {
+function foglalasokBetoltese(vetitesId) {
+    const storedFoglalasok = localStorage.getItem("foglalasok");
+    if (storedFoglalasok) {
+        foglalasok = JSON.parse(storedFoglalasok);
+    }
+
     const foglalasokVetitesre = Object.values(foglalasok).filter(f => f.vetitesId === vetitesId);
     foglalasokVetitesre.forEach(foglalas => {
         const helyElem = document.querySelector(`.szek[data-sor="${foglalas.hely.sor}"][data-szek="${foglalas.hely.szek}"]`);
@@ -43,6 +48,13 @@ function szekValasztas(event) {
         const bankkartya = prompt("Kérem adja meg a bankkártya számát:");
         const ervenyesseg = prompt("Kérem adja meg a bankkártya érvényességét (MM/YY):");
         const cvv = prompt("Kérem adja meg a bankkártya CVV kódját:");
+
+        const veglegesites = confirm(`Foglalás véglegesítése:\nNév: ${nev}\nHely: Sor ${sor}, Szek ${szek}\nBankkártya: ${bankkartya}\nÉrvényesség: ${ervenyesseg}\nCVV: ${cvv}`);
+
+        if (!veglegesites) {
+            alert("Foglalás megszakítva.");
+            return;
+        }
 
         if (nev && bankkartya && ervenyesseg && cvv) {
             const urlParams = new URLSearchParams(window.location.search);
@@ -65,6 +77,8 @@ function foglalasMentese(vetitesId, sor, szek, nev, bankkartya, ervenyesseg, cvv
         ervenyesseg: ervenyesseg,
         cvv: cvv
     };
+
+    localStorage.setItem("foglalasok", JSON.stringify(foglalasok));
     alert("Foglalás sikeres!");
 }
 
@@ -74,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const vetites = vetitesek[vetitesId];
     if (vetites) {
         teremVizualizalas(vetites.teremId);
-        foglalasVizualizalas(vetitesId);
+        foglalasokBetoltese(vetitesId);
     } else {
         document.getElementById("teremVizualizacio").textContent = "Nincs ilyen vetítés.";
     }
