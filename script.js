@@ -197,14 +197,16 @@ function filmekBetoltese(filmek) {
     for (const filmId in filmek) {
         const film = filmek[filmId];
         const filmElem = document.createElement("div");
+        filmElem.dataset.filmId = film.id;
         filmElem.classList.add("film");
         filmElem.innerHTML = `
+        <img src="img/${film.id}.jpg" alt="${film.cim} poszter" class="film-poszter">
             <h2>${film.cim} (${film.ev})</h2>
-            <img src="img/${film.id}.jpg" alt="${film.cim} poszter" class="film-poszter">
             <p><strong>Eredeti cím:</strong> ${film.eredetiCim}</p>
             <p><strong>Leírás:</strong> ${film.leiras}</p>
             <p><strong>Hossz:</strong> ${film.hosszPerc} perc</p>
             <p><strong>Korhatár:</strong> ${film.korhatar}+</p>
+            
         `;
         filmTarto.appendChild(filmElem);
     }
@@ -212,4 +214,14 @@ function filmekBetoltese(filmek) {
 
 document.addEventListener("DOMContentLoaded", () => {
     filmekBetoltese(filmek);
+});
+
+document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("film")) {
+        const filmId = parseInt(event.target.dataset.filmId);
+        const film = getFilm(filmId);
+        if (film) {
+            alert(`Kiválasztott film: ${film.cim}`);
+        }
+    }
 });
