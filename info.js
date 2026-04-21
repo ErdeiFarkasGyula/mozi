@@ -132,7 +132,7 @@ const vetitesek = {
 const termek = {
     1: {
         id: 1,
-        nev: "Főterem",
+        nev: "Kisterem",
         sorok: {
             1: 8,
             2: 12,
@@ -141,7 +141,7 @@ const termek = {
     },
     2: {
         id: 2,
-        nev: "Kisterem",
+        nev: "Főterem",
         sorok: {
             1: 10,
             2: 14,
