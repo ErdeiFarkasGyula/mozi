@@ -3,7 +3,13 @@ function teremVizualizalas(teremId) {
     const teremElem = document.getElementById("teremVizualizacio");
     teremElem.innerHTML = "";
     if (terem) {
+        const vaszon = document.createElement("h1");
+        vaszon.textContent = `______________________________________________`;
+        vaszon.classList.add("vaszon");
+        teremElem.appendChild(vaszon);
+
         const table = document.createElement("table");
+        table.classList.add("teremTabla");
         for (const sor in terem.sorok) {
             const tr = document.createElement("tr");
             for (let szek = 1; szek <= terem.sorok[sor]; szek++) {
