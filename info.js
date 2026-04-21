@@ -198,6 +198,7 @@ let foglalasok = {
     }
 }
 
+//Segítő függyvény
 function getFilm(id) {
     for (const filmId in filmek) {
         if (filmek[filmId].id === id) {
