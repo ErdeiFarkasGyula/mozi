@@ -11,34 +11,66 @@ function getFilmById(id) {
     return null;
 }
 
+const filmCimElem = document.getElementById("filmCim");
+const filmEredetiCimElem = document.getElementById("filmEredetiCim");
+const filmLeirasElem = document.getElementById("filmLeiras");
+const filmHosszElem = document.getElementById("filmHossz");
+const filmKorhatarElem = document.getElementById("filmKorhatar");
+const filmRendezokElem = document.getElementById("filmRendezok");
+const filmIrokElem = document.getElementById("filmIrok");
+const filmMufajokElem = document.getElementById("filmMufajok");
+const filmPoszterElem = document.getElementById("filmPoszter");
+
+const vetitesekElem = document.getElementById("vetitesekLista");
+
 function filmInfoBetoltese() {
     const urlParams = new URLSearchParams(window.location.search);
     const filmId = parseInt(urlParams.get("id"));
     const film = getFilmById(filmId);
     if (film) { 
-        document.getElementById("filmCim").textContent = `${film.cim} (${film.ev})`;
-        document.getElementById("filmEredetiCim").textContent = film.eredetiCim;
-        document.getElementById("filmLeiras").textContent = film.leiras;
-        document.getElementById("filmHossz").textContent = `${film.hosszPerc} perc`;
-        document.getElementById("filmKorhatar").textContent = `${film.korhatar}+`;
+        filmCimElem.textContent = `${film.cim} (${film.ev})`;
+        filmEredetiCimElem.textContent = film.eredetiCim;
+        filmLeirasElem.textContent = film.leiras;
+        filmHosszElem.textContent = `${film.hosszPerc} perc`;
+        filmKorhatarElem.textContent = `${film.korhatar}+`;
+
         const rendezokMapped = film.rendezoIds.map(id => szemelyek[id] ? szemelyek[id].nev : "Ismeretlen").join(", ");
-        document.getElementById("filmRendezok").textContent = rendezokMapped;
+        filmRendezokElem.textContent = rendezokMapped;
+
         const irokMapped = film.iroIds.map(id => szemelyek[id] ? szemelyek[id].nev : "Ismeretlen").join(", ");
-        document.getElementById("filmIrok").textContent = irokMapped;
+        filmIrokElem.textContent = irokMapped;
+
         const mufajokMapped = film.mufajIds.map(id => mufajok[id] ? mufajok[id].nev : "Ismeretlen").join(", ");
-        document.getElementById("filmMufajok").textContent = mufajokMapped;
-        document.getElementById("filmPoszter").src = `img/${film.id}.jpg`;
-        document.getElementById("filmPoszter").alt = `${film.cim} poszter`;
+        filmMufajokElem.textContent = mufajokMapped;
+
+        filmPoszterElem.src = `img/${film.id}.jpg`;
+        filmPoszterElem.alt = `${film.cim} poszter`;
+
+        const filmVetitesek = Object.values(vetitesek).filter(v => v.filmId === film.id);
+        if (filmVetitesek.length > 0) {
+            const ul = document.createElement("ul");
+            filmVetitesek.forEach(vetites => {
+                const li = document.createElement("li");
+                const terem = termek[vetites.teremId] ? termek[vetites.teremId].nev : "Ismeretlen terem";
+                const kezdes = new Date(vetites.kezdes).toLocaleString();
+                li.textContent = `${terem} - ${kezdes} - ${vetites.nyelv.toUpperCase()}${vetites.felirat ? ` (Felirat: ${vetites.felirat.toUpperCase()})` : ""} - ${vetites.ar} Ft`;
+                ul.appendChild(li);
+            });
+            vetitesekElem.appendChild(ul);
+        } else {
+            vetitesekElem.innerHTML = "<p>Nincsenek vetítések ehhez a filmhez.</p>";
+        }
+        
     } else {
-        document.getElementById("filmCim").textContent = "Film nem található";
-        document.getElementById("filmEredetiCim").textContent = "";
-        document.getElementById("filmLeiras").textContent = "";
-        document.getElementById("filmHossz").textContent = "";
-        document.getElementById("filmKorhatar").textContent = "";
-        document.getElementById("filmRendezok").textContent = "";
-        document.getElementById("filmIrok").textContent = "";
-        document.getElementById("filmMufajok").textContent = "";
-        document.getElementById("filmPoszter").src = "";
-        document.getElementById("filmPoszter").alt = "";
+        filmCimElem.textContent = "Film nem található";
+        filmEredetiCimElem.textContent = "";
+        filmLeirasElem.textContent = "";
+        filmHosszElem.textContent = "";
+        filmKorhatarElem.textContent = "";
+        filmRendezokElem.textContent = "";
+        filmIrokElem.textContent = "";
+        filmMufajokElem.textContent = "";
+        filmPoszterElem.src = "";
+        filmPoszterElem.alt = "";
     }
 }
