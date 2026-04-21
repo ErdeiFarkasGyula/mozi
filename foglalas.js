@@ -39,7 +39,26 @@ function szekValasztas(event) {
         const sor = target.dataset.sor;
         const szek = target.dataset.szek;
         alert(`Kiválasztott hely: Sor ${sor}, Szek ${szek}`);
+        const nev = prompt("Kérem adja meg a nevét:");
+        if (nev) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const vetitesId = parseInt(urlParams.get("vetitesId"));
+            foglalasMentese(vetitesId, sor, szek, nev);
+            target.classList.add("foglalt");
+            target.title = nev;
+        }
     }
+}
+
+function foglalasMentese(vetitesId, sor, szek, nev) {
+    const ujFoglalasId = Object.keys(foglalasok).length + 1;
+    foglalasok[ujFoglalasId] = {
+        id: ujFoglalasId,
+        nev: nev,
+        vetitesId: vetitesId,
+        hely: { sor: sor, szek: szek }
+    };
+    alert("Foglalás sikeres!");
 }
 
 document.addEventListener("DOMContentLoaded", () => {

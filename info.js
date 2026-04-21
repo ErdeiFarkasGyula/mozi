@@ -1,4 +1,4 @@
-const filmek = {
+let filmek = {
     1: {
         id: 1,
         cim: "A Gyűrűk Ura: A Gyűrű Szövetsége",
@@ -49,7 +49,7 @@ const filmek = {
     }
 }
 
-const szemelyek = {
+let szemelyek = {
     1: { id: 1, nev: "Peter Jackson" },
     2: { id: 2, nev: "J.R.R. Tolkien" },
     3: { id: 3, nev: "Ridley Scott" },
@@ -60,7 +60,7 @@ const szemelyek = {
     8: { id: 8, nev: "Vukán György" }
 }
 
-const mufajok = {
+let mufajok = {
     1: { id: 1, nev: "fantasy" },
     2: { id: 2, nev: "kaland" },
     3: { id: 3, nev: "sci-fi" },
@@ -72,7 +72,7 @@ const mufajok = {
     9: { id: 9, nev: "horror" }
 }
 
-const vetitesek = {
+let vetitesek = {
     1: {
         id: 1,
         filmId: 1,
@@ -129,7 +129,7 @@ const vetitesek = {
     }
 }
 
-const termek = {
+let termek = {
     1: {
         id: 1,
         nev: "Kisterem",
@@ -150,7 +150,7 @@ const termek = {
     }
 }
 
-const foglalasok = {
+let foglalasok = {
     1: {
         id: 1,
         nev: "Pop Simon",
