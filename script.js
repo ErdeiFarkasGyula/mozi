@@ -3,6 +3,7 @@ const filmek = {
         id: 1,
         cim: "A Gyűrűk Ura: A Gyűrű Szövetsége",
         eredetiCim: "The Lord of the Rings: The Fellowship of the Ring",
+        leiras: "Egy fiatal hobbit, Frodó Baggins, egy varázslatos gyűrűt örököl, amely hatalmas erővel bír. A gyűrűt el kell pusztítani, mielőtt a gonosz Szauron kezébe kerülne. Frodó és társai egy veszélyes útra indulnak, hogy megsemmisítsék a gyűrűt.",
         ev: 2001,
         rendezoIds: [1],
         iroIds: [2],
@@ -12,57 +13,51 @@ const filmek = {
     },
     2: {
         id: 2,
-        cim: "Eredet",
-        eredetiCim: "Inception",
-        ev: 2010,
+        cim: "A nyolcadik utas: A Halál",
+        eredetiCim: "Alien",
+        leiras: "Egy űrhajó legénysége egy ismeretlen bolygón egy halálos idegen lényt talál. Az idegen gyorsan elpusztítja a legénység tagjait, és a túlélőknek meg kell találniuk a módját, hogy megállítsák a gyilkos lényt, mielőtt az teljesen elpusztítja őket.",
+        ev: 1979,
         rendezoIds: [3],
         iroIds: [3],
-        mufajIds: [3, 4],
-        hosszPerc: 148,
-        korhatar: 12
+        mufajIds: [3, 9],
+        hosszPerc: 117,
+        korhatar: 16
     },
     3: {
         id: 3,
-        cim: "Interstellar",
-        eredetiCim: "Interstellar",
+        cim: "Grand Budapest Hotel",
+        eredetiCim: "The Grand Budapest Hotel",
+        leiras: "A Grand Budapest Hotel egy híres szálloda, amely a 20. század elején virágzott. A történet a szálloda legendás concierge-ának, Gustave H.-nek és fiatal tanítványának, Zero Moustafának kalandjait követi nyomon, akik egy lopott festmény és egy családi örökség körül bonyolódó rejtélybe keverednek.",
         ev: 2014,
-        rendezoIds: [3],
-        iroIds: [3],
-        mufajIds: [3, 5],
-        hosszPerc: 169,
+        rendezoIds: [4],
+        iroIds: [4],
+        mufajIds: [5, 6],
+        hosszPerc: 99,
         korhatar: 12
     },
     4: {
         id: 4,
-        cim: "A sötét lovag",
-        eredetiCim: "The Dark Knight",
-        ev: 2008,
-        rendezoIds: [3],
-        iroIds: [3, 4],
-        mufajIds: [6, 4],
-        hosszPerc: 152,
-        korhatar: 16
-    },
-    5: {
-        id: 5,
-        cim: "Shrek",
-        eredetiCim: "Shrek",
-        ev: 2001,
-        rendezoIds: [5],
-        iroIds: [6],
-        mufajIds: [7, 2],
-        hosszPerc: 90,
-        korhatar: 6
+        cim: "Gyula vitéz télen-nyáron",
+        eredetiCim: "Gyula vitéz télen-nyáron",
+        leiras: "Prohászka Feri egyszerű, hétköznapi ember, sörgyári munkás volt. Ám egyszer a Magyar Televízió tehetségkutatói véletlenül rátaláltak. Az MTV egy 12 részes történelmi kalandfilmsorozat forgatására készült, és a gyártásvezető ragaszkodott ahhoz, hogy a nép egyszerű gyermeke játssza a főhőst, Gyula vitézt. Az újdonsült amatőr színész eleinte kissé idegenkedett a filmgyártás körülményeitől, de hamarosan kedvét lelte benne, és a sorozat is országos népszerűségre tett szert. A tévéfilm törökverő főszereplője az ország új kedvencévé vált. Gyula vitéz sztárrá emelkedett, majd nemzeti hőssé vált. Különösen az asszonyok és a lányok lelkesedtek érte. A kisemberek megszerették, a magukénak érezték, alakja még a nemzeti illúziókat ápoló értelmiség körében is hódított.",
+        ev: 1970,
+        rendezoIds: [7],
+        iroIds: [8],
+        mufajIds: [2],
+        hosszPerc: 76,
+        korhatar: 12
     }
 }
 
 const szemelyek = {
     1: { id: 1, nev: "Peter Jackson" },
     2: { id: 2, nev: "J.R.R. Tolkien" },
-    3: { id: 3, nev: "Christopher Nolan" },
-    4: { id: 4, nev: "Jonathan Nolan" },
+    3: { id: 3, nev: "Ridley Scott" },
+    4: { id: 4, nev: "Wes Anderson" },
     5: { id: 5, nev: "Andrew Adamson" },
-    6: { id: 6, nev: "William Steig" }
+    6: { id: 6, nev: "William Steig" },
+    7: { id: 7, nev: "Bácskai Lauró István" },
+    8: { id: 8, nev: "Vukán György" }
 }
 
 const mufajok = {
@@ -72,7 +67,9 @@ const mufajok = {
     4: { id: 4, nev: "akció" },
     5: { id: 5, nev: "dráma" },
     6: { id: 6, nev: "krimi" },
-    7: { id: 7, nev: "animáció" }
+    7: { id: 7, nev: "animáció" },
+    8: { id: 8, nev: "vígjáték" },
+    9: { id: 9, nev: "horror" }
 }
 
 const vetitesek = {
@@ -183,3 +180,36 @@ const foglalasok = {
         hely: { sor: 1, szek: 1 }
     }
 }
+
+function getFilm(id) {
+    for (const filmId in filmek) {
+        if (filmek[filmId].id === id) {
+            return filmek[filmId];
+        }
+    }
+    return null;
+}
+
+const filmTarto = document.getElementById("filmTarto");
+
+function filmekBetoltese(filmek) {
+    filmTarto.innerHTML = "";
+    for (const filmId in filmek) {
+        const film = filmek[filmId];
+        const filmElem = document.createElement("div");
+        filmElem.classList.add("film");
+        filmElem.innerHTML = `
+            <h2>${film.cim} (${film.ev})</h2>
+            <img src="img/${film.id}.jpg" alt="${film.cim} poszter" class="film-poszter">
+            <p><strong>Eredeti cím:</strong> ${film.eredetiCim}</p>
+            <p><strong>Leírás:</strong> ${film.leiras}</p>
+            <p><strong>Hossz:</strong> ${film.hosszPerc} perc</p>
+            <p><strong>Korhatár:</strong> ${film.korhatar}+</p>
+        `;
+        filmTarto.appendChild(filmElem);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    filmekBetoltese(filmek);
+});
