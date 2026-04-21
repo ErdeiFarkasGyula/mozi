@@ -53,7 +53,7 @@ function filmInfoBetoltese() {
                 const li = document.createElement("li");
                 const terem = termek[vetites.teremId] ? termek[vetites.teremId].nev : "Ismeretlen terem";
                 const kezdes = new Date(vetites.kezdes).toLocaleString();
-                li.textContent = `${terem} - ${kezdes} - ${vetites.nyelv.toUpperCase()}${vetites.felirat ? ` (Felirat: ${vetites.felirat.toUpperCase()})` : ""} - ${vetites.ar} Ft`;
+                li.innerHTML = `${terem} - ${kezdes} - ${vetites.nyelv.toUpperCase()}${vetites.felirat ? ` (Felirat: ${vetites.felirat.toUpperCase()})` : ""} - ${vetites.ar} Ft <button onclick="window.location.href='foglalas.html?vetitesId=${vetites.id}'">Foglalás</button>`;
                 ul.appendChild(li);
             });
             vetitesekElem.appendChild(ul);
