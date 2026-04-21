@@ -25,7 +25,7 @@ function teremVizualizalas(teremId) {
 function foglalasVizualizalas(vetitesId) {
     const foglalasokVetitesre = Object.values(foglalasok).filter(f => f.vetitesId === vetitesId);
     foglalasokVetitesre.forEach(foglalas => {
-        const helyElem = document.querySelector(`.szek:nth-child(${foglalas.hely.szek}):nth-child(${foglalas.hely.sor})`);
+        const helyElem = document.querySelector(`.szek[data-sor="${foglalas.hely.sor}"][data-szek="${foglalas.hely.szek}"]`);
         if (helyElem) {
             helyElem.classList.add("foglalt");
             helyElem.title = foglalas.nev;
